@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>ヤフオクアプリで開く</title>
+<style>
+  body { font-family: -apple-system, sans-serif; background: #fff; color: #222; margin: 0; padding: 32px 16px; text-align: center; }
+  a.btn { display: inline-block; margin-top: 20px; padding: 14px 24px; border-radius: 10px; background: #ff0033; color: #fff; font-size: 18px; text-decoration: none; }
+  a.sub { display: block; margin-top: 16px; color: #555; font-size: 14px; }
+</style>
+</head>
+<body>
+<p id="msg">ヤフオクアプリを開いています…</p>
+<a class="btn" id="app" href="#">アプリで開く</a>
+<a class="sub" id="web" href="#">ブラウザで開く</a>
+<script>
+  // Only the auction ID is read from the address (?id=...). Nothing is stored or sent anywhere.
+  var id = (new URLSearchParams(location.search).get('id') || '').replace(/[^a-zA-Z0-9]/g, '');
+  var app = 'yjauctions://auctionitem?auctionid=' + id;
+  var web = 'https://auctions.yahoo.co.jp/jp/auction/' + id;
+  document.getElementById('app').href = app;
+  document.getElementById('web').href = web;
+  if (id) { location.href = app; } else { document.getElementById('msg').textContent = '商品IDがありません'; }
+</script>
+</body>
+</html>
